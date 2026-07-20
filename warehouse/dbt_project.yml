@@ -1,0 +1,21 @@
+name: 'helios'
+version: '1.0.0'
+config-version: 2
+profile: 'helios'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+clean-targets: ["target", "dbt_packages"]
+
+models:
+  helios:
+    staging:
+      +materialized: view
+      +schema: silver
+    marts:
+      core:
+        +materialized: table
+        +schema: gold
+      analytics:
+        +materialized: table
+        +schema: gold

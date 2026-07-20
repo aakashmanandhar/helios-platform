@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+
+  - name: dim_product
+    columns:
+      - name: product_id
+        data_tests: [unique, not_null]
+
+  - name: dim_channel
+    columns:
+      - name: channel_code
+        data_tests: [unique, not_null]
+
+  - name: dim_warehouse
+    columns:
+      - name: warehouse_code
+        data_tests: [unique, not_null]
+
+  - name: dim_date
+    columns:
+      - name: date_day
+        data_tests: [unique, not_null]
+
+  - name: fact_orders
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: channel_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_channel')
+                field: channel_code
+
+  - name: fact_order_items
+    columns:
+      - name: order_item_id
+        data_tests: [unique, not_null]
+      - name: product_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+
+  - name: fact_inventory_snapshot
+    columns:
+      - name: product_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: warehouse_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_warehouse')
+                field: warehouse_code

@@ -1,0 +1,7 @@
+helios:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: 'helios.duckdb'
+      threads: 4
