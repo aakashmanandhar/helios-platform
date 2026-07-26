@@ -8,3 +8,8 @@ requests
 confluent-kafka
 dbt-core
 dbt-duckdb
+dbt-bigquery
+sentence-transformers
+duckdb
+pgvector
+pytest
