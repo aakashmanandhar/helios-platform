@@ -26,3 +26,12 @@ infra/terraform/.terraform/
 infra/terraform/*.tfstate
 infra/terraform/*.tfstate.backup
 infra/terraform/.terraform.lock.hcl
+
+# Django backend
+webapp/backend/db.sqlite3
+webapp/backend/**/__pycache__/
+webapp/backend/**/migrations/
+
+# React frontend
+webapp/frontend/node_modules/
+webapp/frontend/dist/
