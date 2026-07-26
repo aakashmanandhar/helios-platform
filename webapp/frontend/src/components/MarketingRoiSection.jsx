@@ -5,7 +5,7 @@ import InfoTag from './InfoTag';
 import LoadingState from './LoadingState';
 import ErrorState from './ErrorState';
 import { Megaphone, TrendingUp, Award } from 'lucide-react';
-import { AXIS_STYLE, GRID_STYLE, TOOLTIP_PROPS, fmtMoney } from '../chartTheme';
+import { AXIS_STYLE, GRID_STYLE, TOOLTIP_PROPS, fmtMoney, fmtAxisNumber } from '../chartTheme';
 
 export default function MarketingRoiSection() {
   const { data, loading, error } = useApiData('/kpi/marketing-roi/');
@@ -36,7 +36,7 @@ export default function MarketingRoiSection() {
           <BarChart data={data.by_channel}>
             <CartesianGrid {...GRID_STYLE} />
             <XAxis dataKey="channel_code" {...AXIS_STYLE} />
-            <YAxis {...AXIS_STYLE} />
+            <YAxis {...AXIS_STYLE} width={44} tickFormatter={fmtAxisNumber} />
             <Tooltip {...TOOLTIP_PROPS} formatter={(v) => fmtMoney(v)} />
             <Legend wrapperStyle={{ color: '#8c88a3', fontSize: 12 }} />
             <Bar dataKey="total_spend" fill="#ef4444" name="Ad Spend" radius={[4, 4, 0, 0]} />

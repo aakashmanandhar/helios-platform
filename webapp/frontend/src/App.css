@@ -620,3 +620,17 @@ h4 {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* --- Risk band pill variants (churn model) --- */
+.pill-high {
+  background: rgba(239, 68, 68, 0.14);
+  color: #ef4444;
+}
+.pill-medium {
+  background: rgba(245, 158, 11, 0.14);
+  color: #b45309;
+}
+.pill-low {
+  background: rgba(16, 185, 129, 0.14);
+  color: #059669;
+}

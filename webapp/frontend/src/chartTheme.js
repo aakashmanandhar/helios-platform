@@ -33,3 +33,11 @@ export function fmtNumber(n) {
 export function initials(first, last) {
   return `${(first || '?')[0]}${(last || '?')[0]}`.toUpperCase();
 }
+
+export function fmtAxisNumber(n) {
+  if (n === null || n === undefined) return '';
+  const abs = Math.abs(n);
+  if (abs >= 1_000_000) return `${(n / 1_000_000).toFixed(0)}M`;
+  if (abs >= 1_000) return `${(n / 1_000).toFixed(0)}K`;
+  return `${n}`;
+}

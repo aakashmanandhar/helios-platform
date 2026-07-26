@@ -8,7 +8,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
 } from 'recharts';
 import { DollarSign, UserX, TrendingUp, ShoppingCart, BarChart3, PieChart as PieChartIcon, Users, Trophy, Crown } from 'lucide-react';
-import { COLORS, AXIS_STYLE, GRID_STYLE, TOOLTIP_PROPS, fmtMoney, initials } from '../chartTheme';
+import { COLORS, AXIS_STYLE, GRID_STYLE, TOOLTIP_PROPS, fmtMoney, fmtAxisNumber, initials } from '../chartTheme';
 
 export default function OverviewSection() {
   const ltv = useApiData('/kpi/ltv-rfm/');
@@ -81,7 +81,7 @@ export default function OverviewSection() {
               </defs>
               <CartesianGrid {...GRID_STYLE} />
               <XAxis dataKey="month" {...AXIS_STYLE} tickFormatter={(m) => m?.slice(0, 7)} />
-              <YAxis {...AXIS_STYLE} label={{ value: 'Revenue ($)', angle: -90, position: 'insideLeft', style: { fill: '#9ca3af', fontSize: 11 } }} />
+              <YAxis {...AXIS_STYLE} width={44} tickFormatter={fmtAxisNumber} />
               <Tooltip {...TOOLTIP_PROPS} formatter={(v) => fmtMoney(v)} />
               <Area type="monotone" dataKey="revenue" name="Revenue" stroke="#7c3aed" fill="url(#rev)" strokeWidth={2} />
             </AreaChart>
@@ -93,7 +93,7 @@ export default function OverviewSection() {
             <BarChart data={marketing.data.by_channel}>
               <CartesianGrid {...GRID_STYLE} />
               <XAxis dataKey="channel_code" {...AXIS_STYLE} />
-              <YAxis {...AXIS_STYLE} />
+              <YAxis {...AXIS_STYLE} width={44} tickFormatter={fmtAxisNumber} />
               <Tooltip {...TOOLTIP_PROPS} formatter={(v) => fmtMoney(v)} />
               <Legend wrapperStyle={{ color: '#8c88a3', fontSize: 12 }} />
               <Bar dataKey="total_spend" fill="#ef4444" name="Ad Spend" radius={[4, 4, 0, 0]} />

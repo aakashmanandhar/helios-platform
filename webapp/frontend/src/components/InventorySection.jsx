@@ -5,7 +5,7 @@ import InfoTag from './InfoTag';
 import LoadingState from './LoadingState';
 import ErrorState from './ErrorState';
 import { PackageX, PackagePlus, DollarSign, Warehouse } from 'lucide-react';
-import { TOOLTIP_PROPS, AXIS_STYLE, GRID_STYLE, fmtMoney, fmtNumber } from '../chartTheme';
+import { TOOLTIP_PROPS, AXIS_STYLE, GRID_STYLE, fmtMoney, fmtNumber, fmtAxisNumber } from '../chartTheme';
 
 const STATUS_COLORS = { Healthy: '#10b981', Overstocked: '#f59e0b', 'Reorder Needed': '#ec4899', Stockout: '#ef4444' };
 const STATUS_DEFS = {
@@ -72,7 +72,7 @@ export default function InventorySection() {
             <BarChart data={data.by_warehouse}>
               <CartesianGrid {...GRID_STYLE} />
               <XAxis dataKey="warehouse_code" {...AXIS_STYLE} />
-              <YAxis {...AXIS_STYLE} />
+              <YAxis {...AXIS_STYLE} width={44} tickFormatter={fmtAxisNumber} />
               <Tooltip {...TOOLTIP_PROPS} />
               <Legend wrapperStyle={{ color: '#8c88a3', fontSize: 12 }} />
               <Bar dataKey="stockout_count" fill="#ef4444" name="Stockouts" radius={[4, 4, 0, 0]} />

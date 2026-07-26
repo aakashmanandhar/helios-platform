@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'kpi',
     'assistant',
+    'churn',
 ]
 
 MIDDLEWARE = [
@@ -96,3 +97,7 @@ POSTGRES = {
     'USER': os.getenv('DB_USER', 'helios_app'),
     'PASSWORD': os.getenv('DB_PASSWORD'),
 }
+
+# --- Phase 8: feature store + model serving ---
+FEATURE_REPO_PATH = BASE_DIR.parent.parent / 'feature_repo'
+CHURN_MODEL_PATH = BASE_DIR.parent.parent / 'ml' / 'churn_model.joblib'

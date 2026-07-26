@@ -4,7 +4,7 @@ import StatCard from './StatCard';
 import LoadingState from './LoadingState';
 import ErrorState from './ErrorState';
 import { Eye, ShoppingCart, CreditCard, CheckCircle, Filter } from 'lucide-react';
-import { COLORS, AXIS_STYLE, GRID_STYLE, TOOLTIP_PROPS, fmtNumber } from '../chartTheme';
+import { COLORS, AXIS_STYLE, GRID_STYLE, TOOLTIP_PROPS, fmtNumber, fmtAxisNumber } from '../chartTheme';
 
 export default function FunnelSection() {
   const { data, loading, error } = useApiData('/kpi/funnel-conversion/');
@@ -39,7 +39,7 @@ export default function FunnelSection() {
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={funnelSteps} layout="vertical" margin={{ left: 20 }}>
               <CartesianGrid {...GRID_STYLE} />
-              <XAxis type="number" {...AXIS_STYLE} />
+              <XAxis type="number" {...AXIS_STYLE} tickFormatter={fmtAxisNumber} />
               <YAxis type="category" dataKey="stage" {...AXIS_STYLE} width={110} />
               <Tooltip {...TOOLTIP_PROPS} />
               <Bar dataKey="count" name="Sessions" radius={[0, 4, 4, 0]}>

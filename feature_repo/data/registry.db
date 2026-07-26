@@ -1,0 +1,42 @@
+
+P
+0
+customer_id"customer_idJhelios_feature_store
+¾ı—Ó°Ïè«¾ı—Ó°Ïè«
+K
++
+__dummy"
+__dummy_idJhelios_feature_store
+¾ı—Ó¨œì«¾ı—Ó›ï«1"$59783d8c-18d0-4fc2-84a3-06ec0a3c8dce*şı—ÓĞ®¤­2é
+®
+customer_ltv_rfm_featureshelios_feature_storecustomer_id"
+recency_days"
+	frequency"
+lifetime_value"
+avg_order_value"
+r_score"
+f_score"
+m_score"
+	rfm_total"
+churned2€†°–:¼event_timestamp*created_timestampZ data/customer_features.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢data/customer_features.parquet’¾ı—Ó¨ƒª¨"¾ı—Ó€¼Ê«@b
+customer_id’latest6
+¾ı—Ó°—Ñ«şı—Óà÷ü¬
+Ş÷ç¼Ğè®¿Ûı—Ó0bÓevent_timestamp*created_timestampZ data/customer_features.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢data/customer_features.parquetªhelios_feature_store’¾ı—Ó¨ƒª¨"¾ı—Ó€¼Ê«Š6
+
+helios_feature_store
+¾ı—Ó¨ Ê¨¾ı—Ó¨ Ê¨’È
+Å
+customer_ltv_rfm_featureshelios_feature_store"feature_view*Ï
+®
+customer_ltv_rfm_featureshelios_feature_storecustomer_id"
+recency_days"
+	frequency"
+lifetime_value"
+avg_order_value"
+r_score"
+f_score"
+m_score"
+	rfm_total"
+churned2€†°–:¼event_timestamp*created_timestampZ data/customer_features.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢data/customer_features.parquet’¾ı—Ó¨ƒª¨"¾ı—Ó€¼Ê«@b
+customer_id’latest
+¾ı—Ó°—Ñ«¾ı—Ó°—Ñ«2¾ı—Óø½æ«B$0cfd0ac7-3832-41dd-96d7-17dce710c80f

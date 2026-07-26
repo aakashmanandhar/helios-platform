@@ -7,6 +7,10 @@ sources:
       - name: customers
       - name: products
       - name: orders
+        loaded_at_field: updated_at
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 72, period: hour}
       - name: order_items
       - name: inventory
       - name: clickstream_events
