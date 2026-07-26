@@ -1,0 +1,69 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: helios-airflow-db
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - airflow_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+
+  airflow-init:
+    image: apache/airflow:2.10.4-python3.12
+    container_name: helios-airflow-init
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment: &airflow-env
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      DB_HOST: host.docker.internal
+      DB_PORT: "5432"
+      DB_NAME: helios
+      DB_USER: helios_app
+      DB_PASSWORD: helios_dev_pw
+      _PIP_ADDITIONAL_REQUIREMENTS: "psycopg2-binary pandas numpy pyarrow requests dbt-core dbt-duckdb"
+    volumes:
+      - ../:/opt/helios
+      - ./dags:/opt/airflow/dags
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com"
+
+  airflow-webserver:
+    image: apache/airflow:2.10.4-python3.12
+    container_name: helios-airflow-webserver
+    depends_on:
+      - airflow-init
+    environment: *airflow-env
+    volumes:
+      - ../:/opt/helios
+      - ./dags:/opt/airflow/dags
+    ports:
+      - "8081:8080"
+    command: webserver
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  airflow-scheduler:
+    image: apache/airflow:2.10.4-python3.12
+    container_name: helios-airflow-scheduler
+    depends_on:
+      - airflow-init
+    environment: *airflow-env
+    volumes:
+      - ../:/opt/helios
+      - ./dags:/opt/airflow/dags
+    command: scheduler
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  airflow_pg_data:
