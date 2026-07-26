@@ -1,6 +1,7 @@
 #!/bin/bash
 # Starts the Helios web app (Django backend + React frontend) and opens the browser.
 # Safe to run multiple times — skips anything already running.
+set -m
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PID_DIR="/tmp/helios_pids"
