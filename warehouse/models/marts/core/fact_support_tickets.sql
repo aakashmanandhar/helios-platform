@@ -6,6 +6,7 @@ select
     priority,
     channel,
     status,
+    description,
     cast(opened_at as date) as opened_date,
     opened_at,
     resolved_at,

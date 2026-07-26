@@ -12,6 +12,7 @@ select
     priority,
     channel,
     status,
+    description,
     cast(opened_at as timestamp) as opened_at,
     cast(resolved_at as timestamp) as resolved_at,
     csat_score

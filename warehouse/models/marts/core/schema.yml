@@ -1,31 +1,25 @@
 version: 2
-
 models:
   - name: dim_customer
     columns:
       - name: customer_id
         data_tests: [unique, not_null]
-
   - name: dim_product
     columns:
       - name: product_id
         data_tests: [unique, not_null]
-
   - name: dim_channel
     columns:
       - name: channel_code
         data_tests: [unique, not_null]
-
   - name: dim_warehouse
     columns:
       - name: warehouse_code
         data_tests: [unique, not_null]
-
   - name: dim_date
     columns:
       - name: date_day
         data_tests: [unique, not_null]
-
   - name: fact_orders
     columns:
       - name: order_id
@@ -42,7 +36,6 @@ models:
               arguments:
                 to: ref('dim_channel')
                 field: channel_code
-
   - name: fact_order_items
     columns:
       - name: order_item_id
@@ -53,7 +46,6 @@ models:
               arguments:
                 to: ref('dim_product')
                 field: product_id
-
   - name: fact_inventory_snapshot
     columns:
       - name: product_id
@@ -68,7 +60,6 @@ models:
               arguments:
                 to: ref('dim_warehouse')
                 field: warehouse_code
-
   - name: fact_events
     columns:
       - name: event_id
@@ -91,7 +82,6 @@ models:
               arguments:
                 to: ref('dim_channel')
                 field: channel_code
-
   - name: fact_payments
     columns:
       - name: payment_id
@@ -104,7 +94,6 @@ models:
               arguments:
                 to: ref('fact_orders')
                 field: order_id
-
   - name: fact_support_tickets
     columns:
       - name: ticket_id
@@ -115,7 +104,6 @@ models:
               arguments:
                 to: ref('dim_customer')
                 field: customer_id
-
   - name: fact_shipments
     columns:
       - name: shipment_id
@@ -132,7 +120,6 @@ models:
               arguments:
                 to: ref('dim_warehouse')
                 field: warehouse_code
-
   - name: fact_weather_daily
     columns:
       - name: warehouse_code
@@ -141,3 +128,31 @@ models:
               arguments:
                 to: ref('dim_warehouse')
                 field: warehouse_code
+  - name: fact_product_reviews
+    columns:
+      - name: review_id
+        data_tests: [unique, not_null]
+      - name: rating
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: product_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+      - name: customer_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fact_orders')
+                field: order_id

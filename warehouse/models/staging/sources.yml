@@ -1,5 +1,4 @@
 version: 2
-
 sources:
   - name: bronze
     meta:
@@ -18,3 +17,5 @@ sources:
       - name: support_tickets
       - name: shipments
       - name: weather_daily
+      - name: product_reviews
+      - name: knowledge_base_articles

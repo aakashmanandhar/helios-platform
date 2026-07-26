@@ -1,5 +1,4 @@
 version: 2
-
 models:
   - name: stg_customers
     columns:
@@ -7,12 +6,10 @@ models:
         data_tests: [unique, not_null]
       - name: email
         data_tests: [unique, not_null]
-
   - name: stg_products
     columns:
       - name: product_id
         data_tests: [unique, not_null]
-
   - name: stg_orders
     columns:
       - name: order_id
@@ -29,7 +26,6 @@ models:
           - accepted_values:
               arguments:
                 values: ['completed', 'cancelled', 'pending', 'refunded']
-
   - name: stg_order_items
     columns:
       - name: order_item_id
@@ -48,7 +44,6 @@ models:
               arguments:
                 to: ref('stg_products')
                 field: product_id
-
   - name: stg_inventory
     columns:
       - name: product_id
@@ -58,3 +53,9 @@ models:
               arguments:
                 to: ref('stg_products')
                 field: product_id
+  - name: stg_knowledge_base_articles
+    columns:
+      - name: doc_id
+        data_tests: [unique, not_null]
+      - name: content
+        data_tests: [not_null]
