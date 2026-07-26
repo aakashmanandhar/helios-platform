@@ -10,6 +10,10 @@ select
     warehouse_code,
     stock_qty,
     reorder_point,
+    {% if target.type == 'bigquery' %}
+    timestamp_micros(div(last_updated, 1000)) as last_updated
+    {% else %}
     last_updated
+    {% endif %}
 from dedup
 where rn = 1

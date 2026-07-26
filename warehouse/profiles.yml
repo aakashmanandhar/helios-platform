@@ -5,3 +5,10 @@ helios:
       type: duckdb
       path: 'helios.duckdb'
       threads: 4
+    bigquery:
+      type: bigquery
+      method: oauth
+      project: helios-platform-aakash
+      dataset: gold
+      threads: 4
+      location: us-central1
