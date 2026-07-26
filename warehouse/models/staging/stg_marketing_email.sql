@@ -5,7 +5,11 @@ with dedup as (
     from {{ source('bronze', 'marketing_email') }}
 )
 select
+    {% if target.type == 'bigquery' %}
+    date(parse_timestamp('%Y-%m-%dT%H:%M:%SZ', send_date)) as spend_date,
+    {% else %}
     cast(send_date as date) as spend_date,
+    {% endif %}
     'email' as channel_code,
     campaign_name,
     cost_usd as spend,

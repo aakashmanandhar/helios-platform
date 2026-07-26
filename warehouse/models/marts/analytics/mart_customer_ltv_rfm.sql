@@ -13,8 +13,13 @@ with customer_orders as (
 recency_calc as (
     select
         *,
+        {% if target.type == 'bigquery' %}
+        date_diff(current_date(), last_order_date, day) as recency_days,
+        date_diff(current_date(), first_order_date, day) as tenure_days
+        {% else %}
         date_diff('day', last_order_date, current_date) as recency_days,
         date_diff('day', first_order_date, current_date) as tenure_days
+        {% endif %}
     from customer_orders
 ),
 
