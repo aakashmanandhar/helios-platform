@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dbt-pipeline-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: helios_app
+          POSTGRES_PASSWORD: helios_dev_pw
+          POSTGRES_DB: helios
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: helios
+      DB_USER: helios_app
+      DB_PASSWORD: helios_dev_pw
+      N_CUSTOMERS: 500
+      N_PRODUCTS: 50
+      N_ORDERS: 2000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Apply database schema
+        run: PGPASSWORD=$DB_PASSWORD psql -h $DB_HOST -U $DB_USER -d $DB_NAME -f database/01_schema.sql
+
+      - name: Generate small-scale synthetic data
+        run: |
+          cd data_generator
+          python generate_dimensions.py
+          python generate_orders.py
+          python generate_inventory.py
+          python generate_marketing.py
+          python generate_payments.py
+          python generate_support_tickets.py
+          python generate_shipments.py
+
+      - name: Ingest batch sources to bronze
+        run: |
+          python ingestion/export_postgres_to_bronze.py
+          python ingestion/ingest_marketing_feeds.py
+          python ingestion/ingest_payments_feed.py
+          python ingestion/ingest_support_feed.py
+          python ingestion/ingest_shipping_feed.py
+
+      - name: dbt build (excluding live-API weather source)
+        working-directory: warehouse
+        env:
+          DBT_PROFILES_DIR: .
+        run: dbt build --exclude stg_weather_daily fact_weather_daily

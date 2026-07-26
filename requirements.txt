@@ -1,0 +1,10 @@
+psycopg2-binary
+faker
+pandas
+numpy
+pyarrow
+python-dotenv
+requests
+confluent-kafka
+dbt-core
+dbt-duckdb

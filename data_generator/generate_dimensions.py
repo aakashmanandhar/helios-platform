@@ -1,4 +1,5 @@
 import io
+import os
 import random
 import numpy as np
 import pandas as pd
@@ -10,8 +11,8 @@ Faker.seed(42)
 random.seed(42)
 np.random.seed(42)
 
-N_CUSTOMERS = 200_000
-N_PRODUCTS = 8_000
+N_CUSTOMERS = int(os.getenv("N_CUSTOMERS", "200000"))
+N_PRODUCTS = int(os.getenv("N_PRODUCTS", "8000"))
 
 REGIONS = ["Northeast", "Southeast", "Midwest", "Southwest", "West"]
 CITIES_BY_REGION = {

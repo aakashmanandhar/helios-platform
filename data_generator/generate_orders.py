@@ -1,4 +1,5 @@
 import io
+import os
 import time
 import numpy as np
 import pandas as pd
@@ -7,7 +8,7 @@ from db import get_connection
 np.random.seed(42)
 t0 = time.time()
 
-N_ORDERS = 4_000_000
+N_ORDERS = int(os.getenv("N_ORDERS", "4000000"))
 
 conn = get_connection()
 
