@@ -11,3 +11,6 @@ sources:
       - name: order_items
       - name: inventory
       - name: clickstream_events
+      - name: marketing_google
+      - name: marketing_meta
+      - name: marketing_email

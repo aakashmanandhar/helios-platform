@@ -48,7 +48,7 @@ order_day_offsets = np.random.choice(N_DAYS, size=N_ORDERS, p=day_weight)
 order_dates = START + pd.to_timedelta(order_day_offsets, unit="D") + pd.to_timedelta(np.random.randint(0, 86400, size=N_ORDERS), unit="s")
 
 statuses = np.random.choice(["completed", "cancelled", "pending", "refunded"], size=N_ORDERS, p=[0.85, 0.08, 0.05, 0.02])
-channels = np.random.choice(["organic", "paid_search", "direct", "email", "affiliate"], size=N_ORDERS, p=[0.35, 0.25, 0.20, 0.12, 0.08])
+channels = np.random.choice(["organic", "paid_search", "paid_social", "direct", "email", "affiliate"], size=N_ORDERS, p=[0.30, 0.20, 0.10, 0.20, 0.12, 0.08])
 
 order_ids = np.arange(1, N_ORDERS + 1)  # table is empty, BIGSERIAL will assign these in this exact order
 

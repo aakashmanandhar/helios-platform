@@ -1,6 +1,7 @@
 channel_code,channel_name,channel_type
 organic,Organic Search,unpaid
 paid_search,Paid Search,paid
+paid_social,Paid Social,paid
 direct,Direct,unpaid
 email,Email,owned
 affiliate,Affiliate,paid
