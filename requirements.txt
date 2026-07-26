@@ -18,3 +18,4 @@ djangorestframework
 django-cors-headers
 google-cloud-bigquery
 anthropic
+google-genai
