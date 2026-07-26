@@ -18,3 +18,4 @@ warehouse/*.duckdb.wal
 
 # macOS
 .DS_Store
+external_feeds/

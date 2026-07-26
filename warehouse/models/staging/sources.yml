@@ -14,3 +14,7 @@ sources:
       - name: marketing_google
       - name: marketing_meta
       - name: marketing_email
+      - name: payments
+      - name: support_tickets
+      - name: shipments
+      - name: weather_daily

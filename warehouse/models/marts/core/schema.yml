@@ -91,3 +91,53 @@ models:
               arguments:
                 to: ref('dim_channel')
                 field: channel_code
+
+  - name: fact_payments
+    columns:
+      - name: payment_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - relationships:
+              config:
+                severity: warn
+              arguments:
+                to: ref('fact_orders')
+                field: order_id
+
+  - name: fact_support_tickets
+    columns:
+      - name: ticket_id
+        data_tests: [unique, not_null]
+      - name: customer_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+
+  - name: fact_shipments
+    columns:
+      - name: shipment_id
+        data_tests: [unique, not_null]
+      - name: order_id
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('fact_orders')
+                field: order_id
+      - name: warehouse_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_warehouse')
+                field: warehouse_code
+
+  - name: fact_weather_daily
+    columns:
+      - name: warehouse_code
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('dim_warehouse')
+                field: warehouse_code
