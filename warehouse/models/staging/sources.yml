@@ -10,3 +10,4 @@ sources:
       - name: orders
       - name: order_items
       - name: inventory
+      - name: clickstream_events
