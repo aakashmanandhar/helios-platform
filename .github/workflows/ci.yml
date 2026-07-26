@@ -72,4 +72,4 @@ jobs:
         working-directory: warehouse
         env:
           DBT_PROFILES_DIR: .
-        run: dbt build --exclude stg_weather_daily fact_weather_daily
+        run: dbt build --exclude stg_weather_daily fact_weather_daily stg_clickstream_events fact_events mart_funnel_conversion
